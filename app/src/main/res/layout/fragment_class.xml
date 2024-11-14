@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="20dp">
+
+        <TextView
+            android:id="@+id/txt_logo"
+            style="@style/txt_big"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="left"
+            android:text="ONEDAY"
+            android:textSize="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ScrollView
+            android:id="@+id/scroll_login"
+            android:layout_marginTop="30dp"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/txt_logo">
+
+            <!-- LinearLayout으로 변경 -->
+            <LinearLayout
+                android:id="@+id/box_class"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="vertical"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        style="@style/txt_big"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="수업 방식" />
+
+                    <androidx.appcompat.widget.AppCompatCheckBox
+                        android:layout_width="match_parent"
+                        android:layout_marginTop="10dp"
+                        android:checked="true"
+                        android:layout_height="30dp"
+                        android:text="Off-line" />
+
+                    <androidx.appcompat.widget.AppCompatCheckBox
+                        android:layout_width="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_height="30dp"
+                        android:text="ON-line" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_marginTop="20dp"
+                    style="@style/txt_big"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="결과 사진" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="18dp"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/img_title"
+                        android:layout_width="0dp"
+                        android:layout_height="170dp"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/default_image"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintDimensionRatio="4:3"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <TextView
+                    android:layout_marginTop="20dp"
+                    style="@style/txt_big"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="연락처" />
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="18dp"
+                    android:inputType="phone"
+
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/edittext_border" />
+
+                <TextView
+                    android:layout_marginTop="20dp"
+                    style="@style/txt_big"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="원데이 클래스 종류" />
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="18dp"
+                    android:inputType="phone"
+
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/edittext_border" />
+
+                <TextView
+                    android:layout_marginTop="20dp"
+                    style="@style/txt_big"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="홈페이지 주소" />
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="18dp"
+                    android:inputType="phone"
+
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/edittext_border" />
+
+                <TextView
+                    android:layout_marginTop="20dp"
+                    style="@style/txt_big"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="매장 주소" />
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="18dp"
+                    android:inputType="phone"
+
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/edittext_border" />
+            </LinearLayout>
+        </ScrollView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

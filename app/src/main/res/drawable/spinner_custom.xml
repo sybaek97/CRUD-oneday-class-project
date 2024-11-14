@@ -1,0 +1,16 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="#00000000"/>
+        </shape>
+    </item>
+    <item android:gravity="center_vertical|right"
+        android:right="10dp">
+        <layer-list>
+            <!-- <bitmap> 대신 벡터 drawable 리소스를 직접 사용 -->
+            <item android:gravity="right" android:width="35dp" android:height="29dp">
+                <inset android:drawable="@drawable/icon_minimenu" />
+            </item>
+        </layer-list>
+    </item>
+</layer-list>

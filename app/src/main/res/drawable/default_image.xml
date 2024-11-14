@@ -1,0 +1,9 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- 첫 번째 레이어: 검정색 사각형 -->
+    <item
+        android:drawable="@drawable/box_no_image" />
+
+    <!-- 두 번째 레이어: 빨간색 원 -->
+    <item
+        android:drawable="@drawable/baseline_hide_image_24" />
+</layer-list>

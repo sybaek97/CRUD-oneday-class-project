@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".view.login.LoginActivity">
+
+        <TextView
+            android:id="@+id/txt_logo"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:gravity="center"
+            style="@style/txt_big"
+            android:text="ONEDAY"
+            android:textSize="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            />
+
+        <LinearLayout
+            android:id="@+id/txt_login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toTopOf="@id/scroll_login"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/txt_logo">
+
+            <TextView
+                style="@style/txt_big"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="로그인"
+                android:textColor="@color/main"
+                android:textSize="30sp" />
+
+            <TextView
+                style="@style/txt_big"
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="이메일과 비밀번호를 입력해주세요"
+                android:textColor="@color/main"
+                android:textSize="15sp" />
+        </LinearLayout>
+
+        <ScrollView
+            android:layout_marginTop="50dp"
+            android:id="@+id/scroll_login"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/txt_login">
+
+            <LinearLayout
+                android:id="@+id/box_login"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <EditText
+                    android:id="@+id/edit_email"
+                    style="@style/edit_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginBottom="20dp"
+                    android:hint="이메일"
+                    android:inputType="textEmailAddress"
+                    android:textColorHint="@color/sub_gray" />
+
+                <EditText
+                    android:id="@+id/edit_pw"
+                    style="@style/edit_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:hint="비밀번호"
+                    android:inputType="textPassword"
+                    android:textColorHint="@color/sub_gray" />
+
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_login"
+                    style="@style/button_text"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="50dp"
+                    android:text="로그인"
+                    android:textColor="@color/white" />
+
+                <TextView
+                    android:clickable="true"
+                    android:id="@+id/btn_signup"
+                    style="@style/button_text"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="20dp"
+                    android:backgroundTint="#00DEDEDE"
+                    android:text="회원가입"
+                    android:textColor="@color/black" />
+
+            </LinearLayout>
+        </ScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
