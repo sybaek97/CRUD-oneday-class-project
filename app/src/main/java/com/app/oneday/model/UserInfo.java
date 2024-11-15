@@ -1,19 +1,20 @@
 package com.app.oneday.model;
 
 public class UserInfo {
+    private static UserInfo instance;
+
     private String email;
     private String name;
     private String status;
 
-    public UserInfo() {}
-
-    // 생성자
-    public UserInfo(String email, String name, String status) {
-        this.email = email;
-        this.name = name;
-        this.status = status;
-
+    private UserInfo() {}
+    public static synchronized UserInfo getInstance() {
+        if (instance == null) {
+            instance = new UserInfo();
+        }
+        return instance;
     }
+
 
     // Getter 및 Setter
     public String getEmail() {

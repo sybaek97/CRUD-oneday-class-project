@@ -119,7 +119,11 @@ public class AuthRepository extends ViewModel {
 
                             UserInfo userInfo = document.toObject(UserInfo.class);
                             if (userInfo != null) {
-                                Log.d("Firestore", userInfo.getStatus());
+                                UserInfo.getInstance().setEmail(userInfo.getEmail());
+                                UserInfo.getInstance().setName(userInfo.getName());
+                                UserInfo.getInstance().setStatus(userInfo.getStatus());
+
+                                Log.d("Firestore", UserInfo.getInstance().getStatus());
                                 userInfoLiveData.postValue(userInfo);
                             } else {
                                 Log.d("Firestore", "UserInfo 변환 실패");

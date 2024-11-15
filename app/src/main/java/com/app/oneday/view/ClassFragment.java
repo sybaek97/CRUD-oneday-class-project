@@ -8,11 +8,9 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.app.oneday.MainActivity;
 import com.app.oneday.databinding.FragmentClassBinding;
-import com.app.oneday.databinding.FragmentMarketBinding;
 
-public class ClassFragment  extends BaseFragment {
+public class ClassFragment extends BaseFragment {
     @Override
     public boolean isBackAvailable() {
         return false;
@@ -22,10 +20,7 @@ public class ClassFragment  extends BaseFragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = FragmentClassBinding.inflate(inflater, container, false);
-        MainActivity mainActivity = (MainActivity) getActivity();
-        if (mainActivity != null) {
-            mainActivity.binding.navigationLayout.setVisibility(View.GONE);
-        }
+
 
         return binding.getRoot();
     }

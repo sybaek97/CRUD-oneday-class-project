@@ -131,6 +131,7 @@
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btn_signup"
                     style="@style/button_text"
+                    android:stateListAnimator="@null"
                     android:layout_width="match_parent"
                     android:layout_marginTop="50dp"
                     android:text="완료"

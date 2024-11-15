@@ -98,6 +98,7 @@
                     android:layout_width="match_parent"
                     android:layout_marginTop="50dp"
                     android:text="로그인"
+                    android:stateListAnimator="@null"
                     android:textColor="@color/white" />
 
                 <TextView
@@ -107,6 +108,7 @@
                     android:layout_width="match_parent"
                     android:layout_marginTop="20dp"
                     android:backgroundTint="#00DEDEDE"
+                    android:stateListAnimator="@null"
                     android:text="회원가입"
                     android:textColor="@color/black" />
 
