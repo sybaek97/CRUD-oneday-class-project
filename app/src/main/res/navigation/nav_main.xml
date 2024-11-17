@@ -23,7 +23,7 @@
             app:popUpTo="@id/marketFragment"
             app:popUpToInclusive="true"/>
         <action
-            android:id="@+id/action_mainFragment_to_classFragment"
+            android:id="@+id/action_mainFragment_to_addClassFragment"
             app:destination="@id/addClassFragment"
             app:enterAnim="@anim/fragment_fade_enter"
             app:exitAnim="@anim/fragment_fade_exit"
@@ -34,7 +34,7 @@
             app:popUpToInclusive="true"
             />
         <action
-            android:id="@+id/action_mainFragment_to_classFragment2"
+            android:id="@+id/action_mainFragment_to_classFragment"
             app:destination="@id/classFragment"
             app:enterAnim="@anim/fragment_fade_enter"
             app:exitAnim="@anim/fragment_fade_exit"
@@ -55,7 +55,9 @@
         android:label="ClassFragment"
         tools:layout="@layout/fragment_class">
 
-
+        <argument
+            android:name="shopId"
+            app:argType="string" />
         <action
             android:id="@+id/action_classFragment_to_mainFragment"
             app:destination="@id/mainFragment"
@@ -69,6 +71,9 @@
 
             />
     </fragment>
+
+
+
     <fragment
         android:id="@+id/addClassFragment"
         android:name="com.app.oneday.view.AddClassFragment"

@@ -4,19 +4,283 @@
 
     <data>
 
+        <variable
+            name="shopInfo"
+            type="com.app.oneday.model.ShopInfo" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-    <TextView
-        android:id="@+id/text_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        />
+        android:layout_height="match_parent"
+        android:padding="20dp">
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/btn_back"
+            style="@style/txt_big"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:background="@drawable/baseline_arrow_back_ios_24"
+            android:backgroundTint="@color/text_black"
+            android:stateListAnimator="@null"
+            app:layout_constraintBottom_toBottomOf="@id/txt_logo"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/txt_logo" />
+
+        <TextView
+            android:id="@+id/txt_logo"
+            style="@style/txt_big"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="end"
+            android:text="ONEDAY"
+            android:textSize="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/btn_back"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ScrollView
+            android:id="@+id/scroll_view"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="30dp"
+            app:layout_constraintBottom_toTopOf="@id/box_btn"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/txt_logo">
+
+            <!-- LinearLayout으로 변경 -->
+            <LinearLayout
+                android:id="@+id/box_class"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/txt_big"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="수업 방식" />
+
+                    <TextView
+                        android:id="@+id/txt_class_status"
+                        style="@style/txt_middle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="@{shopInfo.classStatus}" />
+
+                    <LinearLayout
+                        android:id="@+id/edit_class_status"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:visibility="gone">
+
+                        <androidx.appcompat.widget.AppCompatCheckBox
+                            android:id="@+id/checkbox_off"
+                            android:layout_width="match_parent"
+                            android:layout_height="30dp"
+                            android:layout_marginTop="10dp"
+                            android:checked="true"
+                            android:text="Off-line" />
+
+                        <androidx.appcompat.widget.AppCompatCheckBox
+                            android:id="@+id/checkbox_on"
+                            android:layout_width="match_parent"
+                            android:layout_height="30dp"
+                            android:layout_marginTop="10dp"
+                            android:text="ON-line" />
+                    </LinearLayout>
+                </LinearLayout>
+
+
+                <TextView
+                    style="@style/txt_big"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="연락처" />
+
+                <TextView
+                    android:id="@+id/txt_number"
+                    style="@style/txt_middle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="@{shopInfo.phoneNumber}" />
+
+                <EditText
+                    android:id="@+id/edit_number"
+                    style="@style/txt_middle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/edittext_border"
+                    android:text="@{shopInfo.phoneNumber}"
+                    android:visibility="gone" />
+
+                <TextView
+                    style="@style/txt_big"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="원데이 클래스 종류" />
+
+                <TextView
+                    android:id="@+id/txt_oneday_type"
+                    style="@style/txt_middle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="@{shopInfo.onedayType}" />
+
+                <EditText
+                    android:id="@+id/edit_oneday_type"
+                    style="@style/txt_middle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/edittext_border"
+                    android:text="@{shopInfo.onedayType}"
+                    android:visibility="gone" />
+
+                <TextView
+                    style="@style/txt_big"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="홈페이지 주소" />
+
+                <TextView
+                    android:id="@+id/txt_homepage_address"
+                    style="@style/txt_middle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="@{shopInfo.homepageAddress}" />
+
+                <EditText
+                    android:id="@+id/edit_homepage_address"
+                    style="@style/txt_middle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/edittext_border"
+                    android:text="@{shopInfo.homepageAddress}"
+                    android:visibility="gone" />
+
+                <LinearLayout
+                    android:id="@+id/box_shop_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/txt_big"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="매장 이름" />
+
+                    <TextView
+                        android:id="@+id/txt_shop_name"
+                        style="@style/txt_middle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="@{shopInfo.shopName}" />
+
+                    <EditText
+                        android:id="@+id/edit_shop_name"
+                        style="@style/txt_middle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/edittext_border"
+                        android:visibility="gone"
+                        android:text="@{shopInfo.shopName}" />
+
+                </LinearLayout>
+
+                <TextView
+                    style="@style/txt_big"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="결과 사진" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="18dp">
+
+                    <ImageView
+                        android:id="@+id/img_title"
+                        android:layout_width="0dp"
+                        android:layout_height="170dp"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/default_image"
+                        app:layout_constraintDimensionRatio="16:9"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </LinearLayout>
+        </ScrollView>
+
+        <LinearLayout
+            android:id="@+id/box_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_edit"
+                style="@style/txt_big"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/edittext_border"
+                android:stateListAnimator="@null"
+                android:text="수정" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_delete"
+                style="@style/txt_big"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/button_border"
+                android:stateListAnimator="@null"
+                android:text="삭제"
+
+                android:textColor="@color/white" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_enrollment"
+                style="@style/txt_big"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/button_border"
+                android:stateListAnimator="@null"
+                android:text="수강 신청"
+                android:textColor="@color/white"
+
+                android:visibility="gone" />
+        </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

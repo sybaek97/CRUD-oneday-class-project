@@ -27,6 +27,7 @@ import androidx.navigation.fragment.NavHostFragment;
 
 import com.app.oneday.MainActivity;
 import com.app.oneday.R;
+import com.app.oneday.common.PhotoPermissionHandler;
 import com.app.oneday.databinding.FragmentAddClassBinding;
 import com.app.oneday.model.ShopInfo;
 import com.app.oneday.viewModel.ContentViewModel;
@@ -47,19 +48,23 @@ public class AddClassFragment extends BaseFragment {
     private final ContentViewModel viewModel = new ContentViewModel();
     private LoadingDialogFragment loadingDialog = null;
     private FirebaseAuth firebaseAuth;
+    private PhotoPermissionHandler permissionHandler;
 
     private final ActivityResultLauncher<Intent> pickImageLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
         if (result.getResultCode() == Activity.RESULT_OK) {
             imageUri = result.getData() != null ? result.getData().getData() : null;
             if (imageUri != null) {
-                Log.d("AddClassFragment", "Selected image URI: " + imageUri.toString());
-
-                Glide.with(binding.imgTitle.getContext()).load(imageUri).placeholder(R.drawable.default_image).error(R.drawable.default_image).into(binding.imgTitle);
+                Glide.with(binding.imgTitle.getContext())
+                        .load(imageUri)
+                        .placeholder(R.drawable.default_image)
+                        .error(R.drawable.default_image)
+                        .into(binding.imgTitle);
             } else {
                 Toast.makeText(requireContext(), "이미지를 선택하지 않았습니다.", Toast.LENGTH_SHORT).show();
             }
         }
     });
+
     private final ActivityResultLauncher<String> requestPermissionLauncher = registerForActivityResult(new ActivityResultContracts.RequestPermission(), isGranted -> {
         if (isGranted) {
             openGallery();
@@ -67,6 +72,7 @@ public class AddClassFragment extends BaseFragment {
             Toast.makeText(requireContext(), "사진 접근 권한이 필요합니다.", Toast.LENGTH_SHORT).show();
         }
     });
+
 
 
     @Nullable
@@ -77,6 +83,8 @@ public class AddClassFragment extends BaseFragment {
         if (mainActivity != null) {
             mainActivity.binding.navigationLayout.setVisibility(View.GONE);
         }
+        permissionHandler = new PhotoPermissionHandler(requireContext(), requestPermissionLauncher);
+
         firebaseAuth = FirebaseAuth.getInstance();
         return binding.getRoot();
     }
@@ -119,7 +127,10 @@ public class AddClassFragment extends BaseFragment {
         binding.imgTitle.setOnClickListener(v -> checkPermissionAndOpenGallery());
         binding.btnAdd.setOnClickListener(v -> {
             if (isAtBottom(binding.scrollView)) {
-
+                if (imageUri == null) {
+                    Toast.makeText(requireContext(), "사진을 선택해주세요!", Toast.LENGTH_SHORT).show();
+                    return; // 이후 코드 실행 방지
+                }
                 if (classStatus.get().equals("online")) {
                     if (binding.editHomepageAddress.getText() == null || binding.editOnedayType.getText() == null || binding.editPhoneNumber.getText() == null || binding.editHomepageAddress.getText().toString().trim().isEmpty() || binding.editOnedayType.getText().toString().trim().isEmpty() || binding.editPhoneNumber.getText().toString().trim().isEmpty()) {
                         Toast.makeText(requireContext(), "빈칸을 모두 채워주세요!", Toast.LENGTH_SHORT).show();
@@ -131,8 +142,7 @@ public class AddClassFragment extends BaseFragment {
                         shopInfo.setPhoneNumber(binding.editPhoneNumber.getText().toString());
                         shopInfo.setOnedayType(binding.editOnedayType.getText().toString());
                         shopInfo.setHomepageAddress(binding.editHomepageAddress.getText().toString());
-                        shopInfo.setShopName("online");
-                        Log.d("addclass",shopInfo.getClassStatus()+shopInfo.getUri().toString()+shopInfo.getShopName());
+                        shopInfo.setShopName("");
                         viewModel.addContent(requireContext(),shopInfo);
 
                     }
@@ -175,31 +185,13 @@ public class AddClassFragment extends BaseFragment {
     }
 
     private void checkPermissionAndOpenGallery() {
-        String permission = Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU ? Manifest.permission.READ_MEDIA_IMAGES : Manifest.permission.READ_EXTERNAL_STORAGE;
-
-        if (ContextCompat.checkSelfPermission(requireContext(), permission) == PackageManager.PERMISSION_GRANTED) {
+        if (permissionHandler.checkPhotoPermission()) {
             openGallery();
         } else {
-            requestPermissionWithHandling(permission);
+            permissionHandler.requestPhotoPermission(permissionDeniedCount);
+            permissionDeniedCount++;
         }
     }
-
-    private void requestPermissionWithHandling(String permission) {
-        if (ContextCompat.checkSelfPermission(requireContext(), permission) != PackageManager.PERMISSION_GRANTED) {
-            if ((!shouldShowRequestPermissionRationale(permission) && permissionDeniedCount > 0) || permissionDeniedCount >= 2) {
-                Toast.makeText(requireContext(), "설정에서 권한을 허용해주세요.", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
-                Uri uri = Uri.fromParts("package", requireContext().getPackageName(), null);
-                intent.setData(uri);
-                startActivity(intent);
-            } else {
-                permissionDeniedCount++;
-                requestPermissionLauncher.launch(permission);
-            }
-        }
-    }
-
-
     private void openGallery() {
         Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         intent.setType("image/*");

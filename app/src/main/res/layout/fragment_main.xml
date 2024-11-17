@@ -33,7 +33,6 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:gravity="end"
-            android:text="이름"
             app:layout_constraintTop_toBottomOf="@id/txt_logo"
 
             />

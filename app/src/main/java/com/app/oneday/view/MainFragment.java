@@ -16,6 +16,7 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.app.oneday.MainActivity;
 import com.app.oneday.R;
 import com.app.oneday.databinding.FragmentMainBinding;
 import com.app.oneday.model.UserInfo;
@@ -39,7 +40,10 @@ public class MainFragment extends BaseFragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = FragmentMainBinding.inflate(inflater, container, false);
-
+        MainActivity mainActivity = (MainActivity) getActivity();
+        if (mainActivity != null) {
+            mainActivity.binding.navigationLayout.setVisibility(View.VISIBLE);
+        }
 
         return binding.getRoot();
     }
@@ -55,20 +59,15 @@ public class MainFragment extends BaseFragment {
         NavController navController = Navigation.findNavController(view);
         String uid = currentUser.getUid();
         authViewModel.getNameData(uid);
-        Log.d("tag",uid);
 
         authViewModel.getNameData(uid);
-        contentViewModel.getUserShops(uid);
 
         RecyclerView recyclerView = binding.recyclerView;
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         if (currentUser != null) {
 
-            // 데이터 가져오기
             contentViewModel.getUserShopsLiveData().observe(getViewLifecycleOwner(), shopList -> {
-                MainAdapter adapter = new MainAdapter(shopList, shopInfo -> {
-                    navController.navigate(R.id.action_mainFragment_to_classFragment);
-                });
+                MainAdapter adapter = new MainAdapter(shopList, navController, contentViewModel);
                 recyclerView.setAdapter(adapter);
             });
         }
@@ -78,10 +77,13 @@ public class MainFragment extends BaseFragment {
                 String status = info.getStatus();
                 hideLoadingDialog();
                 if (status.equals("선생님")) {
-                    binding.txtName.setText(info.getName() + "선생님");
+                    contentViewModel.getUserShops(uid);
+                    binding.txtName.setText(info.getName() + " 선생님");
                     binding.btnCreate.setVisibility(View.VISIBLE);
                 } else {
-                    binding.txtName.setText(info.getName());
+                    contentViewModel.getAllShops();
+                    binding.txtName.setText(info.getName()+"님");
+                    binding.btnCreate.setVisibility(View.GONE);
                 }
 
             }
@@ -90,7 +92,7 @@ public class MainFragment extends BaseFragment {
         binding.btnCreate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                navController.navigate(R.id.action_mainFragment_to_classFragment);
+                navController.navigate(R.id.action_mainFragment_to_addClassFragment);
             }
         });
 

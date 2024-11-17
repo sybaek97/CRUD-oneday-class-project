@@ -11,6 +11,8 @@ public class ShopInfo {
     private String onedayType;
     private String homepageAddress;
     private String shopName;
+    private String documentId; // Firestore의 Document ID
+
 
     private ShopInfo() {}
 
@@ -76,5 +78,11 @@ public class ShopInfo {
     public void setShopName(String shopName) {
         this.shopName = shopName;
     }
+    public String getDocumentId() {
+        return documentId;
+    }
 
+    public void setDocumentId(String documentId) {
+        this.documentId = documentId;
+    }
 }
